@@ -4,10 +4,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "jest --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "test:ci": "jest --ci"
   },
   "dependencies": {
+    "bcrypt": "^5.1.0",
+    "bootstrap": "^5.2.3",
+    "mongodb": "^5.1.0",
     "next": "latest",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
@@ -16,6 +20,7 @@
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.2.0",
     "@testing-library/user-event": "14.2.0",
+    "@types/bcrypt": "^5.0.0",
     "@types/react": "18.0.9",
     "@types/testing-library__jest-dom": "5.14.5",
     "jest": "28.1.0",
