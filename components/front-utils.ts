@@ -12,7 +12,11 @@ type Data = {
   password?: String;
 };
 
-export const useFetch = async (url: string, method?: string, data?: Data) => {
+export const dataFetcher = async (
+  url: string,
+  method?: string,
+  data?: Data
+) => {
   if (!method && !data) {
     const res = await fetch(url);
     const resData = await res.json();

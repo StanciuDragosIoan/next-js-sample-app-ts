@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useContext, useState } from "react";
 import { UserContext } from "context/user";
-import { useFetch } from "../front-utils";
+import { dataFetcher } from "../front-utils";
 import { onSetVal } from "utils/utils";
 import { UserTypes } from "domain/data/user/user-access.types";
 
@@ -21,7 +21,7 @@ export default function SingInForm() {
         password,
       };
 
-      const resData = await useFetch("/api/signin", "POST", data);
+      const resData = await dataFetcher("/api/signin", "POST", data);
 
       const { mail, type, company, userId } = resData;
       setUserEmail(mail);
@@ -52,7 +52,7 @@ export default function SingInForm() {
                 onInput={(e) => onSetVal(e, setEmail)}
               />
               <div id="emailHelp" className="form-text text-light">
-                We'll never share your email with anyone else.
+                We`&apos;`ll never share your email with anyone else.
               </div>
             </div>
             <div className="mb-3">

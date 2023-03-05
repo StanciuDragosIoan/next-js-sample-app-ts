@@ -1,7 +1,7 @@
 import { Props } from "@/components/layout";
 import { UserContext } from "context/user";
 import { useRouter } from "next/router";
-import { useFetch } from "@/components/front-utils";
+import { dataFetcher } from "@/components/front-utils";
 import { SyntheticEvent, useContext, useEffect, useState } from "react";
 import { onSetVal } from "../../utils/utils";
 import {
@@ -15,6 +15,7 @@ import { UserPatient } from "domain/data/patient/patient";
 export default function ContractEditPage(props: Props) {
   const router = useRouter();
   const { contractToEdit } = useContext(UserContext);
+
   const [product, setProduct] = useState<Products>(contractToEdit!.product);
   const [duration, setDuration] = useState<contractDuration>(
     contractToEdit!.duration as contractDuration
@@ -27,13 +28,21 @@ export default function ContractEditPage(props: Props) {
   const [patients, setPatients] = useState<UserPatient[]>(defaultPatients);
 
   const productOptions = [
-    <option value="abc20">ABC vial 20mg/ml</option>,
-    <option value="abc10">ABC vial 10mg/ml</option>,
+    <option value="abc20" key={Math.random()}>
+      ABC vial 20mg/ml
+    </option>,
+    <option value="abc10" key={Math.random()}>
+      ABC vial 10mg/ml
+    </option>,
   ];
 
   const durationOptions = [
-    <option value="9">9 months</option>,
-    <option value="12">12 months</option>,
+    <option value="9" key={Math.random()}>
+      9 months
+    </option>,
+    <option value="12" key={Math.random()}>
+      12 months
+    </option>,
   ];
 
   const abc10Prices = (
@@ -80,7 +89,7 @@ export default function ContractEditPage(props: Props) {
 
   const addToContract = async (e: SyntheticEvent, userId: string) => {
     e.preventDefault();
-    await useFetch("/api/patients", "PATCH", {
+    await dataFetcher("/api/patients", "PATCH", {
       contractId: contractToEdit!._id,
       userId,
     });
@@ -102,7 +111,7 @@ export default function ContractEditPage(props: Props) {
       id: contractToEdit!._id,
     };
 
-    const resData = await useFetch("/api/contracts", "PUT", data);
+    const resData = await dataFetcher("/api/contracts", "PUT", data);
     setAlert("Contract Updated Successfully");
 
     setTimeout(() => {
@@ -110,16 +119,16 @@ export default function ContractEditPage(props: Props) {
     }, 2000);
   };
 
-  if (contractToEdit) {
-    useEffect(() => {
-      const fetchData = async () => {
-        const data = await useFetch("/api/patients/");
-        const { users } = data;
-        setPatients(users);
-      };
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await dataFetcher("/api/patients/");
+      const { users } = data;
+      setPatients(users);
+    };
 
-      fetchData();
-    }, []);
+    fetchData();
+  }, []);
+  if (contractToEdit) {
     return (
       <div className="container">
         <div className="container mt-5">
@@ -137,7 +146,7 @@ export default function ContractEditPage(props: Props) {
                   required
                   onInput={(e) => onSetVal(e, setProduct, setAlert)}
                 >
-                  {getSelectValues(contractToEdit.product, productOptions)}
+                  {getSelectValues(contractToEdit!.product, productOptions)}
                 </select>
               </div>
 

@@ -1,7 +1,7 @@
 import { UserContext } from "context/user";
 import { SyntheticEvent, useContext, useEffect, useState } from "react";
 import { onSetVal } from "utils/utils";
-import { useFetch } from "./front-utils";
+import { dataFetcher } from "./front-utils";
 import { CancerStages } from "domain/data/patient/patient";
 
 export default function UpdatePatient() {
@@ -26,7 +26,7 @@ export default function UpdatePatient() {
       userId,
     };
 
-    await useFetch("/api/patients", "PUT", data);
+    await dataFetcher("/api/patients", "PUT", data);
 
     setAlert("Data updated successfully");
     setTimeout(() => {
@@ -36,13 +36,13 @@ export default function UpdatePatient() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await useFetch(`/api/patients/${userId}`);
+      const data = await dataFetcher(`/api/patients/${userId}`);
       const { user } = data;
       setUser(user);
     };
 
     fetchData();
-  }, [alert]);
+  });
 
   return (
     <>

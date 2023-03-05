@@ -2,7 +2,7 @@ import { UserContext } from "context/user";
 import { Contract } from "domain/data/contract/contract-utils";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
-import { useFetch } from "./front-utils";
+import { dataFetcher } from "./front-utils";
 import { onSetVal } from "utils/utils";
 import {
   Products,
@@ -39,7 +39,7 @@ export default function CreateContract() {
       installment: (+price / +duration).toFixed(2),
     };
 
-    await useFetch("/api/contracts", "POST", data);
+    await dataFetcher("/api/contracts", "POST", data);
 
     setAlert("Contract created successfully.");
 
@@ -86,7 +86,7 @@ export default function CreateContract() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await useFetch("/api/contracts");
+      const data = await dataFetcher("/api/contracts");
       const { contracts } = data;
       setContracts(contracts);
     };
@@ -164,7 +164,7 @@ export default function CreateContract() {
                 <Link
                   onClick={() => setContractToEdit(i)}
                   className="bg-info"
-                  href={`/contracts/${i._id}}`}
+                  href={`/contracts/${i._id}`}
                 >
                   Edit contract
                 </Link>

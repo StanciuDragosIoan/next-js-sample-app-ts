@@ -12,6 +12,6 @@ export const onSetVal = <T>(
     f2("");
   }
   const target = e.target as HTMLInputElement;
-  const val = target.value as T;
+  const val = target.value as unknown as T;
   f(val);
 };

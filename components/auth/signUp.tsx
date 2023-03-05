@@ -1,7 +1,7 @@
 import { onSetVal } from "utils/utils";
 import Link from "next/link";
 import { useState } from "react";
-import { useFetch } from "../front-utils";
+import { dataFetcher } from "../front-utils";
 
 import { UserTypes } from "domain/data/user/user-access.types";
 
@@ -30,7 +30,7 @@ export default function SingUpForm() {
         userType,
       };
 
-      await useFetch("/api/signup", "POST", data);
+      await dataFetcher("/api/signup", "POST", data);
     }
   };
 
@@ -76,7 +76,7 @@ export default function SingUpForm() {
                 onInput={(e) => onSetVal(e, setEmail, setErr)}
               />
               <div id="emailHelp" className="form-text text-light">
-                We'll never share your email with anyone else.
+                We`&apos;`ll never share your email with anyone else.
               </div>
             </div>
             <div className="mb-3">

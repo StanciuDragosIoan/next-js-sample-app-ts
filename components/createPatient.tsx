@@ -1,7 +1,7 @@
 import { UserTypes } from "domain/data/user/user-access.types";
 import { useState } from "react";
 import { onSetVal } from "utils/utils";
-import { useFetch } from "./front-utils";
+import { dataFetcher } from "./front-utils";
 
 export default function CreatePatient() {
   const [firstName, setFirstName] = useState("");
@@ -35,7 +35,7 @@ export default function CreatePatient() {
         password: "default_account",
       };
 
-      await useFetch("/api/signup", "POST", data);
+      await dataFetcher("/api/signup", "POST", data);
 
       setErr("User created..");
       setTimeout(() => {
@@ -85,7 +85,7 @@ export default function CreatePatient() {
               onInput={(e) => onSetVal(e, setEmail, setErr)}
             />
             <div id="emailHelp" className="form-text text-light">
-              We'll never share their email with anyone else.
+              We`&apos;`ll never share their email with anyone else.
             </div>
           </div>
           <label htmlFor="age" className="form-label">

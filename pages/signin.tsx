@@ -12,7 +12,7 @@ export default function SingInPage() {
     if (isLogged) {
       router.replace("/");
     }
-  }, []);
+  });
 
   return !isLogged ? <SingInForm /> : "";
 }

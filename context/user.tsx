@@ -1,4 +1,11 @@
-import { Contract } from "domain/data/contract/contract-utils";
+import {
+  Companies,
+  Contract,
+  contractDuration,
+  ContractStatus,
+  pricesAbc10,
+  Products,
+} from "domain/data/contract/contract-utils";
 import { createContext, useEffect, useState } from "react";
 
 interface UserContextType {
@@ -32,12 +39,21 @@ type Props = {
 
 export const UserContextProvider = (props: Props) => {
   const { children } = props;
-  const [isLogged, setLogged] = useState(true);
-  const [userType, setType] = useState("admin");
-  const [userId, setUserId] = useState("640476e5f0ad4f3007b8a652"); // patient 640476f2f0ad4f3007b8a653 admin 640476e5f0ad4f3007b8a652
-  const [userEmail, setUserEmail] = useState("test@test.com");
-  const [userCompany, setUserCompany] = useState("someCompany.LTD");
-  const [contractToEdit, setContractToEdit] = useState<Contract>();
+  const [isLogged, setLogged] = useState(false);
+  const [userType, setType] = useState("");
+  const [userId, setUserId] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userCompany, setUserCompany] = useState("");
+  const [contractToEdit, setContractToEdit] = useState<Contract>({
+    _id: "default",
+    contratParties: [],
+    duration: contractDuration.nine,
+    installment: "default",
+    price: pricesAbc10.avg,
+    product: Products.abc10,
+    status: ContractStatus.open,
+    userCompany: Companies.abcMed,
+  });
 
   useEffect(() => {}, []);
   return (
